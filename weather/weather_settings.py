@@ -7,7 +7,6 @@ DEBUG = False
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LANGUAGE_CODE = 'en-us'
 ROOT_URLCONF = 'weather.urls'
-SECRET_KEY = 'django-insecure-aw5gyu-#9d1dmj&qe52))(+8&8xyu)vtu--&=6a^&rwyp7gy+7'
 STATIC_URL = 'static/'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -20,7 +19,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api',
     'grabber',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -65,3 +66,11 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
