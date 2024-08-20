@@ -44,4 +44,9 @@ class Command(BaseCommand):
                         humidity=period['relativeHumidity']['value'],
                     )
                 )
+            # Implement a basic data processing step such as basic statistics or aggregation by parameter
+            temperatures = [ period['temperature'] for period in data['properties']['periods'] ]
+            temperature_travel = [ max(temperatures[i], temperatures[i+1]) - min(temperatures[i], temperatures[i+1]) for i in range(len(temperatures)-1) ]
+            if not kwargs['silent']: self.stdout.write(f'Temperature will travel for total of {sum(temperature_travel)} degrees in this cell')
+
         WeatherForecast.objects.bulk_create(weather_forecasts, 100, ignore_conflicts=True)
