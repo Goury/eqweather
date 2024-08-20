@@ -1,0 +1,13 @@
+from .weather_settings import *
+
+DEBUG = True
+API_URL = 'http://127.0.0.1:8100'
+SECRET_KEY = 'replace it with something secure'
+USER_AGENT = 'EQ weather application by Goury 0.0.1'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}

@@ -3,14 +3,17 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 ALLOWED_HOSTS = ['*']
 API_ENDPOINT = 'https://api.weather.gov'
+API_URL = 'http://127.0.0.1:8100'
 DEBUG = False
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LANGUAGE_CODE = 'en-us'
 ROOT_URLCONF = 'weather.urls'
+SECRET_KEY = 'do not use in production without redefining this key in settings'
 STATIC_URL = 'static/'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+USER_AGENT = 'EQ weather application but someone did not override the user agent'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -73,4 +76,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
+}
+
+USER_AGENT = 'EQ weather application by Goury 0.0.1'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
