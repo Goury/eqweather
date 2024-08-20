@@ -30,6 +30,12 @@ Then find latitude and longitude values for its corners and run this command to 
 ./manage.py query_cells --lat-start <starting latitude> --lon-start <starting longitude> --lat-end <ending latitude> --lon-end <ending longitude>
 ```
 
+Here's an example with parameters filled in:
+
+```
+./manage.py query_cells --lat-start 39.7 --lon-start -89.7 --lat-end 38 --lon-end -88
+```
+
 It will query US Weather API for existing grid cells in the region.
 
 By default, it will do 20 steps in each direction, resulting in up to 400 cells.
@@ -62,6 +68,6 @@ API documentation is available in the web interface.
 
 ## Tweaking settings
 
-Override default settings in the `settings.py` file, check `settings.template` file for example.
+Override default settings in the `weather/settings.py` file, check `weather/settings.template` file for example.
 
 Do not deploy in production with default settings.
