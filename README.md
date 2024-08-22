@@ -18,6 +18,17 @@ pip install -r requirements.txt
 ./manage.py migrate
 ```
 
+### Upgrading from previous version
+
+```
+cd eqweather
+source .venv/bin/activate
+./manage.py flush
+git pull
+./manage.py makemigrations
+./manage.py migrate
+```
+
 ## US Weather API querying
 
 ### Discovering grid cells
