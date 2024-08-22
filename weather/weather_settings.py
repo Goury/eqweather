@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'grabber',
+    'leaflet',
     'rest_framework',
 ]
 

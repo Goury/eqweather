@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% spaceless %}
+{% load leaflet_tags %}
+{% block extrahead %}
+	{% leaflet_js %}
+	{% leaflet_css %}
+{% endblock %}
+{% block body %}
+	<style>
+		{% include 'style.css' %}
+	</style>
+	<script>
+		{% include 'scripts.js' %}
+	</script>
+	{% leaflet_map "the_map" %}
+	<div id="buttons" class="buttons"></div>
+{% endblock %}
+{% endspaceless %}

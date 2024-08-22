@@ -1,5 +1,5 @@
-from grabber.models import GridCell, WeatherForecast
-from grabber.serializers import GridCellSerializer, WeatherForecastSerializer
+from grabber.models import GridCell, WeatherForecast, ForecastDateTime
+from grabber.serializers import GridCellSerializer, WeatherForecastSerializer, WeatherForecastPerTimeSerializer, ForecastDateTimeSerializer
 
 from rest_framework import generics
 from rest_framework.decorators import api_view
@@ -10,7 +10,8 @@ from rest_framework.reverse import reverse
 @api_view(['GET'])
 def api_root(request, format=None):
     return Response({
-        'cells': reverse('cells', request=request, format=format),
+        'cells': reverse('api:cells', request=request, format=format),
+        'times': reverse('api:times', request=request, format=format),
     })
 
 class GridCellList(generics.ListAPIView):
@@ -41,3 +42,24 @@ class ForecastList(generics.ListAPIView):
 
     def get_queryset(self):
         return WeatherForecast.objects.filter(cell_id=self.kwargs['id'])
+
+
+class ForecastPerTimeList(generics.ListAPIView):
+    """
+    API endpoint to view weather forecasts for a given period of time.
+    """
+    queryset = WeatherForecast.objects.all()
+    serializer_class = WeatherForecastPerTimeSerializer
+    permission_classes = []
+
+    def get_queryset(self):
+        return WeatherForecast.objects.filter(when__when=self.kwargs['datetime'])
+
+
+class TimesList(generics.ListAPIView):
+    """
+    API endpoint to view available weather forecast timestamps.
+    """
+    queryset = ForecastDateTime.objects.all()
+    serializer_class = ForecastDateTimeSerializer
+    permission_classes = []

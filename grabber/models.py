@@ -11,8 +11,11 @@ class GridCell(models.Model):
 		unique_together = ('grid_id', 'grid_x', 'grid_y')
 
 
+class ForecastDateTime(models.Model):
+	when = models.DateTimeField(unique=True)
+
 class WeatherForecast(models.Model):
-	when         = models.DateTimeField()
+	when         = models.ForeignKey(ForecastDateTime, on_delete=models.CASCADE)
 	temperature  = models.DecimalField(max_digits=4, decimal_places=1)
 	humidity     = models.DecimalField(max_digits=4, decimal_places=1)
 	cell         = models.ForeignKey(GridCell, on_delete=models.CASCADE)
