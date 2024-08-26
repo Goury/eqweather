@@ -17,6 +17,8 @@ def api_root(request, format=None):
 class GridCellList(generics.ListAPIView):
     """
     API endpoint to view grid cells.
+    There are all the cells in the database.
+    Each contains cell coordinates and a link to query every weather forecast for the given cell.
     """
     queryset = GridCell.objects.all().order_by('grid_id', 'grid_x', 'grid_y')
     serializer_class = GridCellSerializer
@@ -34,7 +36,8 @@ class GridCellSingle(generics.RetrieveAPIView):
 
 class ForecastList(generics.ListAPIView):
     """
-    API endpoint to view weather forecasts.
+    API endpoint to view weather forecasts for a given cell.
+    Each forecast also contains a link to query all the cell forecasts for the same timestamp.
     """
     queryset = WeatherForecast.objects.all()
     serializer_class = WeatherForecastSerializer
@@ -47,6 +50,7 @@ class ForecastList(generics.ListAPIView):
 class ForecastPerTimeList(generics.ListAPIView):
     """
     API endpoint to view weather forecasts for a given period of time.
+    Each forecast also contains a link to query forecasts for all the timestamps from the same cell.
     """
     queryset = WeatherForecast.objects.all()
     serializer_class = WeatherForecastPerTimeSerializer
@@ -59,6 +63,8 @@ class ForecastPerTimeList(generics.ListAPIView):
 class TimesList(generics.ListAPIView):
     """
     API endpoint to view available weather forecast timestamps.
+    These are all the timestamps for which there is any data.
+    Each contains readable date and time and a link to query all the data points for the given time.
     """
     queryset = ForecastDateTime.objects.all()
     serializer_class = ForecastDateTimeSerializer

@@ -25,6 +25,7 @@ cd eqweather
 source .venv/bin/activate
 ./manage.py flush
 git pull
+pip install -r requirements.txt
 ./manage.py makemigrations
 ./manage.py migrate
 ```
