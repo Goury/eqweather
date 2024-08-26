@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'grabber',
     'leaflet',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
