@@ -59,7 +59,7 @@ class ForecastList(generics.ListAPIView):
     serializer_class = WeatherForecastSerializer
     permission_classes = []
     filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
-    ordering_fields = ['forecast_datetime', 'temperature', 'humidity']
+    ordering_fields = ['when', 'temperature', 'humidity']
     filterset_fields = {
         # TODO add datetime filter
         # blocked by: need to install and integrate a datepicker for the GUI
@@ -96,14 +96,10 @@ class TimesList(generics.ListAPIView):
     These are all the timestamps for which there is any data.
     Each contains readable date and time and a link to query all the data points for the given time.
     """
+    # TODO add datetime filter
+    # blocked by: need to install and integrate a datepicker for the GUI
     queryset = ForecastDateTime.objects.all()
     serializer_class = ForecastDateTimeSerializer
     permission_classes = []
-    filter_backends = [filters.OrderingFilter, DjangoFilterBackend]
-    ordering_fields = ['forecast_datetime', 'temperature', 'humidity']
-    filterset_fields = {
-        # TODO add datetime filter
-        # blocked by: need to install and integrate a datepicker for the GUI
-        'temperature':           ['gte', 'lte', 'exact', 'gt', 'lt'],
-        'humidity':              ['gte', 'lte', 'exact', 'gt', 'lt'],
-    }
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['when']
